@@ -12,7 +12,7 @@ def load_data(url):
     return pd.read_csv(BytesIO(data))
 
 # Load the features (X)
-df_url = 'https://raw.githubusercontent.com/your_username/your_repository/main/Flat%20prices.csv'
+df_url = 'https://github.com/chandrugtx8/housing-sales/blob/main/Flat%20prices.csv'
 df = load_data(df_url)
 df['month'] = pd.to_datetime(df['month'])
 df['year'] = df['month'].dt.year
