@@ -22,7 +22,7 @@ df.drop(columns=['month', 'remaining_lease', 'block', 'street_name'], inplace=Tr
 X = pd.get_dummies(df, columns=['town', 'flat_type', 'storey_range', 'flat_model']).drop(columns=['resale_price'])
 
 # Load the trained model
-model_url = 'https://github.com/your_username/your_repository/raw/main/random_forest_model2.pkl'
+model_url = 'https://github.com/chandrugtx8/housing-sales/blob/main/random_forest_model2%20(1).pkl'
 response = requests.get(model_url)
 model = pickle.load(BytesIO(response.content))
 
