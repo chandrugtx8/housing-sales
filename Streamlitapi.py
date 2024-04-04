@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import pickle
 import requests
-import tempfile
+from io import BytesIO
 
 # Function to load data from GitHub
 def load_data(url):
@@ -24,16 +24,10 @@ X = pd.get_dummies(df, columns=['town', 'flat_type', 'storey_range', 'flat_model
 # Load the trained model
 model_url = 'https://github.com/chandrugtx8/housing-sales/raw/main/random_forest_model2%20(1).pkl'
 response = requests.get(model_url)
+with open('random_forest_model.pkl', 'wb') as f:
+    f.write(response.content)
 
-with tempfile.NamedTemporaryFile(delete=False) as temp_model_file:
-    temp_model_file.write(response.content)
-    temp_model_file_name = temp_model_file.name
-
-model = pickle.load(open(temp_model_file_name, 'rb'))
-
-# Close and delete the temporary file
-temp_model_file.close()
-os.unlink(temp_model_file_name)
+model = pickle.load(BytesIO(response.content))
 
 def main(X):
     st.title('Housing Sales Prediction')
@@ -66,3 +60,4 @@ def main(X):
 
 if __name__ == '__main__':
     main(X)
+
