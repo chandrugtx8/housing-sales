@@ -12,7 +12,7 @@ def load_data(url):
     return pd.read_csv(BytesIO(data))
 
 # Load the features (X)
-df_url = 'https://github.com/chandrugtx8/housing-sales/blob/main/Flat%20prices.csv'
+df_url = 'https://raw.githubusercontent.com/chandrugtx8/housing-sales/main/Flat%20prices.csv'
 df = load_data(df_url)
 df['month'] = pd.to_datetime(df['month'])
 df['year'] = df['month'].dt.year
@@ -22,7 +22,7 @@ df.drop(columns=['month', 'remaining_lease', 'block', 'street_name'], inplace=Tr
 X = pd.get_dummies(df, columns=['town', 'flat_type', 'storey_range', 'flat_model']).drop(columns=['resale_price'])
 
 # Load the trained model
-model_url = 'https://github.com/chandrugtx8/housing-sales/blob/main/random_forest_model2%20(1).pkl'
+model_url = 'https://github.com/chandrugtx8/housing-sales/raw/main/random_forest_model2%20(1).pkl'
 response = requests.get(model_url)
 model = pickle.load(BytesIO(response.content))
 
